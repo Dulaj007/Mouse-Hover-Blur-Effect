@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mouse Hover Blur Effect</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+      cursor: none; /* Hide default cursor */
+    }
+
+    .cursor-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(30px);
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-effect"></div>
+
+  <script>
+    const cursor = document.querySelector('.cursor-effect');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  </script>
+</body>
+</html>
