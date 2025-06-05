@@ -2,40 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mouse Hover Blur Effect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Hover Card</title>
   <style>
     body {
       margin: 0;
+      background: #0f0f0f;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 100vh;
-      background: black;
       overflow: hidden;
-      cursor: none; /* Hide default cursor */
     }
 
     .cursor-effect {
       position: fixed;
       top: 0;
       left: 0;
-      width: 150px;
-      height: 150px;
-      background: rgba(255, 255, 255, 0.1);
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.07);
       border-radius: 50%;
       pointer-events: none;
-      filter: blur(30px);
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
-      z-index: 9999;
+      filter: blur(50px);
+      z-index: 999;
+      transform: translate(-100px, -100px); /* center it */
+      opacity: 0; /* hidden by default */
+      transition: opacity 0.3s ease;
+      will-change: transform;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      transition: all 0.4s ease;
+      text-align: center;
+      width: 300px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .card h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem;
+      border: none;
+      border-radius: 30px;
+      background: #ffffff10;
+      color: white;
+      font-size: 0.95rem;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #ffffff20;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
   <div class="cursor-effect"></div>
 
+  <div class="card">
+    <h2>Join the Future</h2>
+    <button class="btn">Learn More</button>
+    <button class="btn">Get Started</button>
+  </div>
+
   <script>
     const cursor = document.querySelector('.cursor-effect');
+    const radius = 100;
+
     document.addEventListener('mousemove', (e) => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      cursor.style.opacity = '1';
+   
+      cursor.style.transform = `translate(${e.clientX - radius}px, ${e.clientY - radius}px)`;
+    });
+
+    document.body.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+    });
+
+    document.body.addEventListener('mouseenter', () => {
+      cursor.style.opacity = '1';
     });
   </script>
 </body>
